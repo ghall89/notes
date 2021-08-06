@@ -6,6 +6,7 @@ import Main from './components/Main.jsx';
 
 function App() {
 	const [notes, setNotes] = useState([]);
+	const [activeNote, setActiveNote] = useState(false);
 
 	const onAddNote = () => {
 		const newNote = {
@@ -17,9 +18,19 @@ function App() {
 		setNotes([newNote, ...notes]);
 	};
 
+	const onDeleteNote = id => {
+		setNotes(notes.filter(note => note.id !== id));
+	};
+
 	return (
 		<div className="App">
-			<Sidebar notes={notes} onAddNote={onAddNote} />
+			<Sidebar
+				notes={notes}
+				onAddNote={onAddNote}
+				onDeleteNote={onDeleteNote}
+				activeNote={activeNote}
+				setActiveNote={setActiveNote}
+			/>
 			<Main />
 		</div>
 	);
